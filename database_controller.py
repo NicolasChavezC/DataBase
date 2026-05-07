@@ -1,11 +1,13 @@
 import sys
 from PyQt6 import QtWidgets, uic
+from database_connection import Connection
 
 class MainController(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi("DataBase_Main.ui", self)
-
+        self.connection = Connection()
+        self.connection.connect()
         self.btn_Insert.clicked.connect(self.add_user)
 
     def add_user(self):
@@ -20,4 +22,5 @@ class MainController(QtWidgets.QMainWindow):
         elif password.strip() != confirm_password.strip():
             QtWidgets.QMessageBox.warning(self, "Hey, the passwords are not the same my dude")
         else:
-            #Blah Blah Blah
+            sql = "insert into users values (%s,%s,%s,%s,%s,%s)"
+            values = (0,name,last_name,email,password,'default.jpg')
