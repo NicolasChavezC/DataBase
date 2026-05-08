@@ -1,4 +1,5 @@
 import mysql.connector
+import mariadb
 from mysql.connector import Error
 
 class Connection:
@@ -7,16 +8,16 @@ class Connection:
             "host":'localhost',
             "user":"root",
             "password":"",
-            "db":"python_test"
+            "database":"python_test"
         }
         self.connection = None
         self.cursor = None
     def connect(self):
         try:
-            self.connection = mysql.connector.connect(**self.config)
-            if self.connection.is_connected():
-                print("Connection Succesful :3 Wohooo")
-                self.cursor = self.connection.cursor()
+            self.connection = mariadb.connect(**self.config)
+            #if self.connection.is_connected():
+            print("Connection Succesful :3 Wohooo")
+            self.cursor = self.connection.cursor()
         except Error as e:
             print(f"Error: {e}")
     #It goes for all inserting, modifying and eliminating data, just letting you know
